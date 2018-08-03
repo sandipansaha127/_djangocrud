@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<div class='conatiner'>
+<div class='row'>
+	<div class='col-md-3'>
+		<div class="card">
+		  <div class="card-body">
+		    	<h1>{{ request.user }}</h1>
+		  </div>
+		</div>
+	</div>
+
+	<div class='col-md-9'>
+		{% if not request.GET.q %}
+			<div class=''>
+				{% include "CRUD/form.html" with form=create_form action_url=create_url btn_title='Post' %}
+			</div>
+			<hr/>
+		{% endif %}
+		<center>
+	{% for object in object_list %}
+
+		<div class="card" style="width: 20rem;">
+			<a href="{{object.get_absolute_url}}">
+			{% if object.image %}
+				<img class="card-img-top" src='{{ object.image.url }}' alt="Card image cap">
+		  {% endif %}
+		  </a>
+		  <div class="card-body">
+		    <!-- <h5 class="card-title">Card title</h5> -->
+		    <p class="card-text">{{ object.content }}<br/>
+		    via {{ object.user }} | {{ object.timestamp|timesince }} ago <br> </p>
+		    <a class="btn btn-primary" href="{{object.get_absolute_url}}">View</a> | <a class="btn btn-primary" href="{{object.get_absolute_update}}">Edit</a> | <a class="btn btn-primary" href="{{object.get_absolute_delete}}">Delete</a>
+		  </div>
+		</div>
+		{% empty %}
+		{% if request.GET.q %}
+		<p> No Post found. </p>
+		{% else%}
+		<p> No Post Yet. </p>
+		{% endif %}
+
+	{% endfor %}
+	</center>
+</div>
+</div>
+</div>
+
+{% endblock content %}

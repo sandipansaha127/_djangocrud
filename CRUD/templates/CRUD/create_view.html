@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %} Create Blog | {{ block.super }}{% endblock title %}
+
+{% block content %}
+<div class='row'>
+	<div class='col-sm-8 col-sm-offset-2'>
+		<h1>Create Blog</h1>
+		{% include "CRUD/form.html" with form=form btn_title='Post' %}
+	</div>
+</div>
+{% endblock content %}

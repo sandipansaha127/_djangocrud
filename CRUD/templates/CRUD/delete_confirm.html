@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- {% include "CRUD/form.html" with form=form btn_title='Delete' %} -->
+<hr/>
+<form method="post">{% csrf_token %}
+    <p>Are you sure you want to delete the Post"{{ object }}"?</p>
+    <input type="submit" btn_title='Delete' value="Confirm" />
+</form>
+
+{% endblock content %}

@@ -1,0 +1,7 @@
+ <form class="form-inline my-2 my-lg-0" method='GET' action='{% url "CRUD:list" %}'>
+	<div class="form-group">
+			<label for="q"> Search </label>
+		 	<input class="form-control" type="text" name="q" placeholder="search" value='{{ request.GET.q }}'/>
+	</div>
+		 	<input class="btn btn-default"type='submit' value='search'/>
+</form>

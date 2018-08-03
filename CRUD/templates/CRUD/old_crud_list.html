@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<div class='conatiner'>
+<div class='row'>
+	<div class='col-md-3' style='background-color: red;'>
+		<div class="">
+			<h1>{{ request.user }}</h1>
+		</div>
+	</div>
+
+	<div class='col-md-9'>
+		{% if not request.GET.q %}
+			<div class=''>
+				{% include "CRUD/form.html" with form=create_form action_url=create_url btn_title='Post' %}
+			</div>
+			<hr/>
+		{% endif %}
+
+		{% for object in object_list %}
+		<div class="col-md-9">
+		  <div class="media-left">
+		    <a href="#">
+		      {% if object.image %}<img src='{{ object.image.url }}' class='img-responsive' sizes="(max-width: 640px) 100vw, 640px" width="640" height="427">
+		      {% endif %}
+		    </a>
+		  </div>
+		  <div class="media-body">
+		    {{ object.content }}<br/>
+		    via {{ object.user }} | {{ object.timestamp|timesince }} ago <br> <a href="{{object.get_absolute_url}}">View</a> | <a href="{{object.get_absolute_update}}">Edit</a> | <a href="{{object.get_absolute_delete}}">Delete</a>
+		  </div>
+		</div>
+		<hr/>
+	{% empty %}
+		{% if request.GET.q %}
+		<p> No Post found. </p>
+		{% else%}
+		<p> No Post Yet. </p>
+		{% endif %}
+
+	{% endfor %}
+	</div>
+
+</div>
+</div>
+
+{% endblock content %}
